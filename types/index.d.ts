@@ -105,6 +105,6 @@ declare class Viewer {
   static setDefaults(options: Viewer.Options): void;
 }
 
-declare module 'viewerjs' {
+declare module '@photocreate/viewerjs' {
   export default Viewer;
 }
