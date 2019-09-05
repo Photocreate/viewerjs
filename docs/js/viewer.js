@@ -1,11 +1,11 @@
 /*!
- * Viewer.js v1.3.5
+ * Viewer.js v0.0.1
  * https://fengyuanchen.github.io/viewerjs
  *
  * Copyright 2015-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2019-07-04T11:00:16.790Z
+ * Date: 2019-09-05T04:48:35.060Z
  */
 
 (function (global, factory) {
@@ -465,6 +465,10 @@
    */
 
   function hasClass(element, value) {
+    if (!element) {
+      return false;
+    }
+
     return element.classList ? element.classList.contains(value) : element.className.indexOf(value) > -1;
   }
   /**
@@ -506,6 +510,10 @@
 
   function removeClass(element, value) {
     if (!value) {
+      return;
+    }
+
+    if (!element) {
       return;
     }
 
@@ -963,10 +971,12 @@
       var element = this.element,
           options = this.options,
           list = this.list;
-      var items = [];
+      var items = []; // initList may be called in this.update, so should keep idempotent
+
+      list.innerHTML = '';
       forEach(this.images, function (image, index) {
         var src = image.src;
-        var alt = escapeHTMLEntities(image.alt || getImageNameFromURL(src));
+        var alt = image.alt || getImageNameFromURL(src);
         var url = options.url;
 
         if (isString(url)) {
@@ -1778,13 +1788,13 @@
       var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.options.initialViewIndex;
       index = Number(index) || 0;
 
+      if (this.hiding || this.played || index < 0 || index >= this.length || this.viewed && index === this.index) {
+        return this;
+      }
+
       if (!this.isShown) {
         this.index = index;
         return this.show();
-      }
-
-      if (this.hiding || this.played || index < 0 || index >= this.length || this.viewed && index === this.index) {
-        return this;
       }
 
       if (this.viewing) {
@@ -1798,7 +1808,7 @@
       var item = this.items[index];
       var img = item.querySelector('img');
       var url = getData(img, 'originalUrl');
-      var alt = escapeHTMLEntities(img.getAttribute('alt'));
+      var alt = img.getAttribute('alt');
       var image = document.createElement('img');
       image.src = url;
       image.alt = alt;
@@ -2212,7 +2222,7 @@
         var img = item.querySelector('img');
         var image = document.createElement('img');
         image.src = getData(img, 'originalUrl');
-        image.alt = escapeHTMLEntities(img.getAttribute('alt'));
+        image.alt = img.getAttribute('alt');
         total += 1;
         addClass(image, CLASS_FADE);
         toggleClass(image, CLASS_TRANSITION, options.transition);
