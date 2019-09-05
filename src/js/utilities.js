@@ -134,6 +134,10 @@ const REGEXP_SUFFIX = /^(?:width|height|left|top|marginLeft|marginTop)$/;
  * @param {Object} styles - The styles for applying.
  */
 export function setStyle(element, styles) {
+  if (!element) {
+    return;
+  }
+
   const { style } = element;
 
   forEach(styles, (value, property) => {
