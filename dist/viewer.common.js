@@ -5,7 +5,7 @@
  * Copyright 2015-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2019-09-05T04:48:35.060Z
+ * Date: 2019-09-05T06:03:03.162Z
  */
 
 'use strict';
@@ -435,6 +435,10 @@ var REGEXP_SUFFIX = /^(?:width|height|left|top|marginLeft|marginTop)$/;
  */
 
 function setStyle(element, styles) {
+  if (!element) {
+    return;
+  }
+
   var style = element.style;
   forEach(styles, function (value, property) {
     if (REGEXP_SUFFIX.test(property) && isNumber(value)) {
