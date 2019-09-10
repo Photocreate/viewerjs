@@ -130,8 +130,8 @@ export default {
   change(event) {
     const { options, pointers } = this;
     const pointer = pointers[Object.keys(pointers)[0]];
-    const offsetX = pointer.endX - pointer.startX;
-    const offsetY = pointer.endY - pointer.startY;
+    const offsetX = pointer ? pointer.endX - pointer.startX : 0;
+    const offsetY = pointer ? pointer.endY - pointer.startY : 0;
 
     switch (this.action) {
       // Move the current image
