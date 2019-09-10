@@ -252,6 +252,10 @@ export default {
     if (this.viewing || this.viewed) {
       const { image } = this;
 
+      if (!image) {
+        return;
+      }
+
       if (this.viewing) {
         this.viewing.abort();
       }
