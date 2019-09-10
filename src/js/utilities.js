@@ -185,6 +185,10 @@ export function hasClass(element, value) {
  * @param {string} value - The classes to be added.
  */
 export function addClass(element, value) {
+  if (!element) {
+    return;
+  }
+
   if (!value) {
     return;
   }
@@ -409,7 +413,7 @@ export function addListener(element, type, listener, options = {}) {
 
   type.trim().split(REGEXP_SPACES).forEach((event) => {
     if (options.once && !onceSupported) {
-      const { listeners = {} } = element;
+      const listeners = element ? element.listeners : {};
 
       handler = (...args) => {
         delete listeners[event][listener];
