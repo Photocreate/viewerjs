@@ -185,6 +185,10 @@ export function hasClass(element, value) {
  * @param {string} value - The classes to be added.
  */
 export function addClass(element, value) {
+  if (!element) {
+    return;
+  }
+
   if (!value) {
     return;
   }
