@@ -1,11 +1,11 @@
 /*!
- * Viewer.js v0.0.3
+ * Viewer.js v0.0.5
  * https://fengyuanchen.github.io/viewerjs
  *
  * Copyright 2015-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2019-09-10T04:36:59.677Z
+ * Date: 2019-09-11T06:18:09.631Z
  */
 
 'use strict';
@@ -680,6 +680,11 @@ function removeListener(element, type, listener) {
 
 function addListener(element, type, listener) {
   var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+
+  if (!element) {
+    return;
+  }
+
   var _handler = listener;
   type.trim().split(REGEXP_SPACES).forEach(function (event) {
     if (options.once && !onceSupported) {
