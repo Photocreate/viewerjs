@@ -409,6 +409,10 @@ export function removeListener(element, type, listener, options = {}) {
  * @param {Object} options - The event options.
  */
 export function addListener(element, type, listener, options = {}) {
+  if (!element) {
+    return;
+  }
+
   let handler = listener;
 
   type.trim().split(REGEXP_SPACES).forEach((event) => {
