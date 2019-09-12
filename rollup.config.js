@@ -5,7 +5,7 @@ const pkg = require('./package');
 
 pkg.name = pkg.name.replace('js', '');
 
-const name = changeCase.pascalCase(pkg.name);
+const name = changeCase.pascalCase('viewer');
 const banner = createBanner({
   data: {
     name: `${name}.js`,
@@ -19,23 +19,23 @@ module.exports = {
     {
       banner,
       name,
-      file: `dist/${pkg.name}.js`,
+      file: 'dist/viewer.js',
       format: 'umd',
     },
     {
       banner,
-      file: `dist/${pkg.name}.common.js`,
+      file: 'dist/viewer.common.js',
       format: 'cjs',
     },
     {
       banner,
-      file: `dist/${pkg.name}.esm.js`,
+      file: 'dist/viewer.esm.js',
       format: 'esm',
     },
     {
       banner,
       name,
-      file: `docs/js/${pkg.name}.js`,
+      file: 'docs/js/viewer.js',
       format: 'umd',
     },
   ],
