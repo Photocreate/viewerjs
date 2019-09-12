@@ -1,11 +1,11 @@
 /*!
- * Viewer.js v0.0.5
+ * Viewer.js v0.0.6
  * https://fengyuanchen.github.io/viewerjs
  *
  * Copyright 2015-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2019-09-11T06:18:09.631Z
+ * Date: 2019-09-12T03:34:46.125Z
  */
 
 'use strict';
@@ -648,6 +648,11 @@ var onceSupported = function () {
 
 function removeListener(element, type, listener) {
   var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+
+  if (!element) {
+    return;
+  }
+
   var handler = listener;
   type.trim().split(REGEXP_SPACES).forEach(function (event) {
     if (!onceSupported) {
@@ -725,7 +730,12 @@ function addListener(element, type, listener) {
  */
 
 function dispatchEvent(element, type, data) {
-  var event; // Event and CustomEvent on IE9-11 are global objects, not constructors
+  var event;
+
+  if (!element) {
+    return false;
+  } // Event and CustomEvent on IE9-11 are global objects, not constructors
+
 
   if (isFunction(Event) && isFunction(CustomEvent)) {
     event = new CustomEvent(type, {
