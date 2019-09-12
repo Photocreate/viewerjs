@@ -377,6 +377,10 @@ const onceSupported = (() => {
  * @param {Object} options - The event options.
  */
 export function removeListener(element, type, listener, options = {}) {
+  if (!element) {
+    return;
+  }
+
   let handler = listener;
 
   type.trim().split(REGEXP_SPACES).forEach((event) => {
@@ -450,6 +454,10 @@ export function addListener(element, type, listener, options = {}) {
  */
 export function dispatchEvent(element, type, data) {
   let event;
+
+  if (!element) {
+    return false;
+  }
 
   // Event and CustomEvent on IE9-11 are global objects, not constructors
   if (isFunction(Event) && isFunction(CustomEvent)) {
